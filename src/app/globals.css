@@ -120,3 +120,58 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* 견적서 PDF 인쇄 스타일 */
+@media print {
+  /* 기본 인쇄 설정 */
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 인쇄 시 숨길 요소 */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* 견적서 콘텐츠 영역 */
+  .print-content {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 테이블 열 강제 표시 (모바일에서 숨겨진 열) */
+  .sm\:table-cell {
+    display: table-cell !important;
+  }
+
+  /* 카드 스타일 정리 */
+  [data-slot='card'] {
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+  }
+
+  /* 배지 숨김 */
+  [data-slot='badge'] {
+    display: none !important;
+  }
+
+  /* 테이블 border 유지 */
+  table {
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    border-bottom: 1px solid #e5e7eb;
+  }
+}
