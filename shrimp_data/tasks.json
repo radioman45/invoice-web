@@ -1,0 +1,313 @@
+{
+  "tasks": [
+    {
+      "id": "a8e0df14-7884-45d6-a842-3e6545af163d",
+      "name": "App Router 기본 구조 설정",
+      "description": "Next.js 15.5.3 App Router 기반 루트 레이아웃과 랜딩 페이지를 설정합니다. ThemeProvider를 통한 다크모드 지원과 Geist 폰트를 적용하며, 전역 스타일을 구성합니다.",
+      "notes": "Server Component 기본 원칙 준수. layout.tsx는 suppressHydrationWarning 속성 필수.",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2026-02-19T21:07:13.491Z",
+      "updatedAt": "2026-02-19T21:12:44.118Z",
+      "relatedFiles": [
+        {
+          "path": "src/app/layout.tsx",
+          "type": "TO_MODIFY",
+          "description": "루트 레이아웃"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "type": "TO_MODIFY",
+          "description": "랜딩 페이지"
+        },
+        {
+          "path": "src/app/globals.css",
+          "type": "TO_MODIFY",
+          "description": "전역 스타일"
+        }
+      ],
+      "implementationGuide": "1. src/app/layout.tsx 생성: Geist Sans/Mono 폰트, ThemeProvider, Toaster, 메타데이터 설정\n2. src/app/page.tsx 생성: 랜딩 페이지 기본 UI (Server Component)\n3. src/app/globals.css 설정: TailwindCSS v4, @media print 블록, 시맨틱 색상 변수",
+      "verificationCriteria": "npm run dev 실행 시 에러 없이 랜딩 페이지 표시. 다크모드 토글 동작 확인.",
+      "analysisResult": "Phase 1 목표: Next.js 15.5.3 기반 견적서 웹 뷰어 애플리케이션의 기본 골격 구축. App Router 라우팅 구조, TypeScript 타입 시스템, 환경변수 검증, 공통 유틸리티 함수를 구현하여 Phase 2-4에서 UI 컴포넌트와 Notion API 연동을 즉시 착수할 수 있는 견고한 기반을 제공합니다. 아키텍처 원칙: Server Component 우선, async params 패턴, any 타입 금지, Zod 런타임 검증, 한국 로케일 일관성, 시맨틱 색상 변수, 프린트 스타일 고려.",
+      "summary": "App Router 기본 구조 설정 완료. layout.tsx에 Geist 폰트, ThemeProvider (다크모드 지원), Toaster 통합, 메타데이터 설정 완료. page.tsx에 랜딩 페이지 UI 구현 (Server Component). globals.css에 TailwindCSS v4, @media print 스타일 (A4 용지, .print-content), 시맨틱 색상 변수 정의 완료. suppressHydrationWarning 속성 포함으로 next-themes 호환성 보장. 모든 구현이 Server Component 우선 원칙을 준수하며, 프린트 스타일과 다크모드가 완벽히 통합됨.",
+      "completedAt": "2026-02-19T21:12:44.113Z"
+    },
+    {
+      "id": "c94c6b2b-a8c4-4606-9683-21ce0a30add2",
+      "name": "동적 라우팅 및 에러 처리 페이지",
+      "description": "견적서 상세 페이지를 위한 동적 라우팅 구조를 생성하고, 404 페이지와 에러 페이지를 구현합니다. Next.js 15 async params 패턴을 적용합니다.",
+      "notes": "error.tsx만 Client Component. await params 패턴 필수.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "a8e0df14-7884-45d6-a842-3e6545af163d"
+        }
+      ],
+      "createdAt": "2026-02-19T21:07:13.491Z",
+      "updatedAt": "2026-02-20T22:12:02.215Z",
+      "relatedFiles": [
+        {
+          "path": "src/app/quotes/[slug]/page.tsx",
+          "type": "CREATE",
+          "description": "견적서 상세 페이지"
+        },
+        {
+          "path": "src/app/quotes/[slug]/not-found.tsx",
+          "type": "CREATE",
+          "description": "404 페이지"
+        },
+        {
+          "path": "src/app/quotes/[slug]/error.tsx",
+          "type": "CREATE",
+          "description": "에러 페이지"
+        }
+      ],
+      "implementationGuide": "1. src/app/quotes/[slug]/page.tsx: async params 패턴, Suspense, generateMetadata\n2. src/app/quotes/[slug]/not-found.tsx: FileQuestion 아이콘, 홈 버튼\n3. src/app/quotes/[slug]/error.tsx: 'use client', AlertTriangle, reset 버튼",
+      "verificationCriteria": "/quotes/test-slug 접근 시 페이지 렌더링. 존재하지 않는 slug로 not-found.tsx 표시 확인.",
+      "analysisResult": "Phase 1 목표: Next.js 15.5.3 기반 견적서 웹 뷰어 애플리케이션의 기본 골격 구축. App Router 라우팅 구조, TypeScript 타입 시스템, 환경변수 검증, 공통 유틸리티 함수를 구현하여 Phase 2-4에서 UI 컴포넌트와 Notion API 연동을 즉시 착수할 수 있는 견고한 기반을 제공합니다. 아키텍처 원칙: Server Component 우선, async params 패턴, any 타입 금지, Zod 런타임 검증, 한국 로케일 일관성, 시맨틱 색상 변수, 프린트 스타일 고려.",
+      "summary": "세 파일 모두 요구사항 완전 충족. page.tsx: params: Promise 타입 + await params 패턴, generateMetadata, Suspense(QuoteSkeleton fallback), notFound() 호출 - Server Component. not-found.tsx: FileQuestion 아이콘, 홈으로 돌아가기 버튼 - Server Component. error.tsx: use client 지시어, AlertTriangle 아이콘, reset() 함수 연결 - Client Component. npm run typecheck 오류 없이 통과.",
+      "completedAt": "2026-02-20T22:12:02.212Z"
+    },
+    {
+      "id": "7e076c55-d383-49f0-8a2c-2b8f3a4ab6ed",
+      "name": "TypeScript 타입 정의",
+      "description": "Notion 데이터베이스 구조를 반영한 Quote와 QuoteItem 인터페이스를 정의합니다. 모든 필드에 명시적 타입을 지정하며, any 타입 사용을 금지합니다.",
+      "notes": "any 타입 절대 금지. 모든 필드 명시적 타입 지정.",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2026-02-19T21:07:13.491Z",
+      "updatedAt": "2026-02-20T22:10:14.114Z",
+      "relatedFiles": [
+        {
+          "path": "src/lib/notion/types.ts",
+          "type": "CREATE",
+          "description": "Quote, QuoteItem 타입 정의"
+        }
+      ],
+      "implementationGuide": "src/lib/notion/types.ts 생성: Quote 인터페이스 (17개 필드), QuoteItem 인터페이스 (8개 필드). 날짜 필드는 string | null 타입.",
+      "verificationCriteria": "npm run typecheck 통과. any 타입 사용 없음 검증.",
+      "analysisResult": "Phase 1 목표: Next.js 15.5.3 기반 견적서 웹 뷰어 애플리케이션의 기본 골격 구축. App Router 라우팅 구조, TypeScript 타입 시스템, 환경변수 검증, 공통 유틸리티 함수를 구현하여 Phase 2-4에서 UI 컴포넌트와 Notion API 연동을 즉시 착수할 수 있는 견고한 기반을 제공합니다. 아키텍처 원칙: Server Component 우선, async params 패턴, any 타입 금지, Zod 런타임 검증, 한국 로케일 일관성, 시맨틱 색상 변수, 프린트 스타일 고려.",
+      "summary": "src/lib/notion/types.ts 구현 완료. Quote 인터페이스(id, title, quoteNumber, slug, status, issueDate, validUntil, clientCompany, clientName, clientPhone, clientEmail, subtotal, tax, total, notes - 15개 필드), QuoteItem 인터페이스(id, name, spec, quantity, unitPrice, amount, unit, order - 8개 필드) 정의. 날짜 필드 string | null 타입 적용. any 타입 사용 없음. npm run typecheck 오류 없이 통과. 실제 Notion DB 구조(두 개의 분리된 DB)에 최적화된 구현.",
+      "completedAt": "2026-02-20T22:10:14.110Z"
+    },
+    {
+      "id": "abae49a3-2054-4221-bf2b-c1120a8aa96c",
+      "name": "환경변수 및 Notion 상수 설정",
+      "description": "Zod 스키마를 사용한 환경변수 런타임 검증과 Notion 데이터베이스 속성명 상수를 정의합니다. 타입 안전성과 유지보수성을 보장합니다.",
+      "notes": "환경변수 누락 시 서버 시작 전에 에러 발생. Notion 속성명은 한글로 정의.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "7e076c55-d383-49f0-8a2c-2b8f3a4ab6ed"
+        }
+      ],
+      "createdAt": "2026-02-19T21:07:13.491Z",
+      "updatedAt": "2026-02-20T22:11:30.186Z",
+      "relatedFiles": [
+        {
+          "path": "src/lib/env.ts",
+          "type": "CREATE",
+          "description": "환경변수 검증"
+        },
+        {
+          "path": "src/lib/notion/constants.ts",
+          "type": "CREATE",
+          "description": "Notion 상수"
+        },
+        {
+          "path": "src/lib/notion/schemas.ts",
+          "type": "CREATE",
+          "description": "Zod 스키마"
+        }
+      ],
+      "implementationGuide": "1. src/lib/env.ts: Zod envSchema, 환경변수 parse\n2. src/lib/notion/constants.ts: QUOTE_PROPS, ITEM_PROPS, QUOTE_STATUS 상수\n3. src/lib/notion/schemas.ts: quoteSchema, quoteItemSchema",
+      "verificationCriteria": ".env 파일에서 필수 환경변수 누락 시 서버 시작 실패 확인.",
+      "analysisResult": "Phase 1 목표: Next.js 15.5.3 기반 견적서 웹 뷰어 애플리케이션의 기본 골격 구축. App Router 라우팅 구조, TypeScript 타입 시스템, 환경변수 검증, 공통 유틸리티 함수를 구현하여 Phase 2-4에서 UI 컴포넌트와 Notion API 연동을 즉시 착수할 수 있는 견고한 기반을 제공합니다. 아키텍처 원칙: Server Component 우선, async params 패턴, any 타입 금지, Zod 런타임 검증, 한국 로케일 일관성, 시맨틱 색상 변수, 프린트 스타일 고려.",
+      "summary": "세 파일 모두 구현 완료. src/lib/env.ts: Zod envSchema로 NOTION_API_KEY, NOTION_QUOTES_DATABASE_ID, NOTION_ITEMS_DATABASE_ID 필수 검증 - 누락 시 ZodError 발생 확인. src/lib/notion/constants.ts: QUOTE_PROPS(14개 한글 속성명), ITEM_PROPS(8개), QUOTE_STATUS(3개) as const 상수 정의. src/lib/notion/schemas.ts: quoteSchema, quoteItemSchema Zod 스키마 및 타입 추론 익스포트. npm run typecheck 오류 없이 통과.",
+      "completedAt": "2026-02-20T22:11:30.179Z"
+    },
+    {
+      "id": "b00f43d6-6b09-4bb0-b8fe-ecc8fbffb955",
+      "name": "공통 유틸리티 함수 구현",
+      "description": "프로젝트 전체에서 재사용 가능한 유틸리티 함수를 구현합니다. CSS 클래스 병합, 금액 포맷팅, 날짜 포맷팅 기능을 제공하며, 한국 로케일을 기본으로 사용합니다.",
+      "notes": "한국 로케일 일관성 유지. formatDate는 null 안전 처리 필수.",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2026-02-19T21:07:13.491Z",
+      "updatedAt": "2026-02-20T22:10:35.318Z",
+      "relatedFiles": [
+        {
+          "path": "src/lib/utils.ts",
+          "type": "CREATE",
+          "description": "공통 유틸리티 함수"
+        }
+      ],
+      "implementationGuide": "src/lib/utils.ts 생성: cn (CSS 클래스 병합), formatCurrency (금액 포맷), formatDate (날짜 포맷). 모든 함수는 순수 함수로 구현.",
+      "verificationCriteria": "formatCurrency(1500000) = 1,500,000원. formatDate(2026-02-14) = 2026년 2월 14일. formatDate(null) = -.",
+      "analysisResult": "Phase 1 목표: Next.js 15.5.3 기반 견적서 웹 뷰어 애플리케이션의 기본 골격 구축. App Router 라우팅 구조, TypeScript 타입 시스템, 환경변수 검증, 공통 유틸리티 함수를 구현하여 Phase 2-4에서 UI 컴포넌트와 Notion API 연동을 즉시 착수할 수 있는 견고한 기반을 제공합니다. 아키텍처 원칙: Server Component 우선, async params 패턴, any 타입 금지, Zod 런타임 검증, 한국 로케일 일관성, 시맨틱 색상 변수, 프린트 스타일 고려.",
+      "summary": "src/lib/utils.ts 구현 완료. cn(clsx + tailwind-merge), formatCurrency, formatDate 세 함수 모두 정상 동작 확인. formatCurrency(1500000) = \"1,500,000원\", formatDate(\"2026-02-14\") = \"2026년 2월 14일\", formatDate(null) = \"-\" 검증 통과. 모든 함수는 순수 함수로 구현되었으며 한국 로케일 일관성 유지.",
+      "completedAt": "2026-02-20T22:10:35.315Z"
+    },
+    {
+      "id": "743c7e1e-b394-4642-8bf9-5c0f8b010279",
+      "name": "shadcn/ui 컴포넌트 설치 및 견적서 기본 컴포넌트 구현",
+      "description": "shadcn/ui 공통 컴포넌트를 설치하고, 견적서 헤더/발행자·수신자 정보/로딩 스켈레톤 컴포넌트를 구현합니다.\n\n구현 대상:\n1. shadcn/ui 컴포넌트 설치: badge, button, card, separator, skeleton\n2. quote-header.tsx (Server Component): Quote 타입 props, Badge 상태 배지 (발행완료/작성중/만료), formatDate() 사용\n3. quote-parties.tsx (Server Component): 발행자/수신자 정보 카드 레이아웃\n4. quote-skeleton.tsx (Server Component): 로딩 중 표시용 Skeleton 컴포넌트\n\n검증 기준:\n- npm run typecheck 통과\n- Named export 패턴 사용\n- 시맨틱 색상 변수 사용 (text-muted-foreground 등)\n- any 타입 없음",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2026-02-20T22:19:14.233Z",
+      "updatedAt": "2026-02-20T22:19:31.673Z",
+      "relatedFiles": [
+        {
+          "path": "src/components/quote/quote-header.tsx",
+          "type": "CREATE",
+          "description": "견적서 헤더 컴포넌트"
+        },
+        {
+          "path": "src/components/quote/quote-parties.tsx",
+          "type": "CREATE",
+          "description": "발행자/수신자 정보 컴포넌트"
+        },
+        {
+          "path": "src/components/quote/quote-skeleton.tsx",
+          "type": "CREATE",
+          "description": "로딩 스켈레톤 컴포넌트"
+        },
+        {
+          "path": "src/components/ui/badge.tsx",
+          "type": "DEPENDENCY",
+          "description": "shadcn/ui badge"
+        },
+        {
+          "path": "src/components/ui/skeleton.tsx",
+          "type": "DEPENDENCY",
+          "description": "shadcn/ui skeleton"
+        },
+        {
+          "path": "src/lib/notion/types.ts",
+          "type": "REFERENCE",
+          "description": "Quote 타입"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "REFERENCE",
+          "description": "formatDate 유틸리티"
+        }
+      ],
+      "implementationGuide": "1. npx shadcn@latest add badge button card separator skeleton 실행\n2. src/components/quote/quote-header.tsx:\n   - interface QuoteHeaderProps { quote: Quote }\n   - statusVariant Record로 배지 variant 매핑\n   - Badge에 print:hidden 클래스\n3. src/components/quote/quote-parties.tsx:\n   - 발행자/수신자 정보를 Card 또는 div로 레이아웃\n4. src/components/quote/quote-skeleton.tsx:\n   - Skeleton 컴포넌트 조합으로 견적서 구조 모방",
+      "verificationCriteria": "npm run typecheck 통과. badge/skeleton shadcn 컴포넌트 설치 확인. quote-header에서 발행완료/작성중/만료 상태별 Badge variant 올바르게 표시.",
+      "analysisResult": "Phase 2 목표: Next.js 15.5.3 기반 견적서 웹 뷰어의 UI/UX 완성. shadcn/ui 컴포넌트를 활용한 견적서 도메인 컴포넌트 라이브러리 구축 및 반응형 페이지 레이아웃 구현. 아키텍처 원칙: Server Component 우선 (quote-actions.tsx만 Client Component), 시맨틱 색상 변수, print:hidden 클래스, cn() 함수, Named export, any 타입 금지.",
+      "summary": "구현 완료 확인. shadcn/ui 컴포넌트(badge, button, card, separator, skeleton) 설치됨. quote-header.tsx: statusVariant Record로 발행완료/작성중/만료 배지 variant 매핑, Badge에 print:hidden 적용, formatDate() 사용, Named export. quote-parties.tsx, quote-skeleton.tsx 모두 존재. 시맨틱 색상 변수(text-muted-foreground, bg-muted/50) 사용. any 타입 없음.",
+      "completedAt": "2026-02-20T22:19:31.671Z"
+    },
+    {
+      "id": "2264a06c-c9c8-42a5-b457-4bedd359812b",
+      "name": "견적 항목 테이블 및 액션 컴포넌트 구현",
+      "description": "견적 항목 테이블(반응형), 합계 섹션, PDF 다운로드 액션 컴포넌트를 구현합니다.\n\n구현 대상:\n1. quote-items-table.tsx (Server Component): QuoteItem[] 배열 렌더링, 반응형 테이블 (sm:table-cell 패턴으로 모바일에서 열 숨김), formatCurrency() 사용\n2. quote-summary.tsx (Server Component): Separator 사용, 공급가액/부가세(10%)/총합계 표시, formatCurrency() 사용\n3. quote-actions.tsx (Client Component): 'use client', window.print() 호출, print:hidden 클래스 필수\n\n검증 기준:\n- quote-actions.tsx만 'use client' 사용\n- print:hidden 클래스 적용\n- 반응형: 모바일에서 규격/단위/단가 열 숨김",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "743c7e1e-b394-4642-8bf9-5c0f8b010279"
+        }
+      ],
+      "createdAt": "2026-02-20T22:19:14.233Z",
+      "updatedAt": "2026-02-20T22:19:42.356Z",
+      "relatedFiles": [
+        {
+          "path": "src/components/quote/quote-items-table.tsx",
+          "type": "CREATE",
+          "description": "견적 항목 테이블 컴포넌트"
+        },
+        {
+          "path": "src/components/quote/quote-summary.tsx",
+          "type": "CREATE",
+          "description": "합계 섹션 컴포넌트"
+        },
+        {
+          "path": "src/components/quote/quote-actions.tsx",
+          "type": "CREATE",
+          "description": "PDF 다운로드 액션 컴포넌트 (Client Component)"
+        },
+        {
+          "path": "src/components/ui/separator.tsx",
+          "type": "DEPENDENCY",
+          "description": "shadcn/ui separator"
+        },
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "DEPENDENCY",
+          "description": "shadcn/ui button"
+        },
+        {
+          "path": "src/lib/notion/types.ts",
+          "type": "REFERENCE",
+          "description": "QuoteItem 타입"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "REFERENCE",
+          "description": "formatCurrency 유틸리티"
+        }
+      ],
+      "implementationGuide": "1. src/components/quote/quote-items-table.tsx:\n   - interface QuoteItemsTableProps { items: QuoteItem[] }\n   - thead의 규격/단위/단가 열에 hidden sm:table-cell 클래스\n   - tbody에서 item.spec 모바일 인라인 표시\n   - 빈 항목 처리 (items.length === 0)\n2. src/components/quote/quote-summary.tsx:\n   - interface QuoteSummaryProps { quote: Quote }\n   - flex justify-end 레이아웃\n   - Separator 컴포넌트로 구분선\n   - 총합계 text-primary bold 강조\n3. src/components/quote/quote-actions.tsx:\n   - 'use client' 지시어 필수\n   - handlePrint = () => window.print()\n   - Button에 print:hidden 클래스",
+      "verificationCriteria": "quote-actions.tsx에만 use client 지시어. print:hidden 클래스 적용 확인. 모바일(375px)에서 규격/단위/단가 열 숨김, 데스크톱(1024px)에서 모든 열 표시. npm run typecheck 통과.",
+      "analysisResult": "Phase 2 목표: Next.js 15.5.3 기반 견적서 웹 뷰어의 UI/UX 완성. shadcn/ui 컴포넌트를 활용한 견적서 도메인 컴포넌트 라이브러리 구축 및 반응형 페이지 레이아웃 구현. 아키텍처 원칙: Server Component 우선 (quote-actions.tsx만 Client Component), 시맨틱 색상 변수, print:hidden 클래스, cn() 함수, Named export, any 타입 금지.",
+      "summary": "구현 완료 확인. quote-items-table.tsx: hidden sm:table-cell 패턴으로 규격/단위/단가 열 모바일 숨김, 빈 항목 처리(colSpan=7), formatCurrency() 사용, Server Component. quote-summary.tsx: Separator, flex justify-end, text-primary bold 총합계, formatCurrency() 사용, Server Component. quote-actions.tsx: 'use client' 지시어, window.print(), print:hidden 클래스, Download 아이콘 포함. npm run typecheck 통과.",
+      "completedAt": "2026-02-20T22:19:42.347Z"
+    },
+    {
+      "id": "86fa20b8-0884-433c-a7fa-a1c8597ddae6",
+      "name": "페이지 레이아웃 및 반응형 UI 완성",
+      "description": "견적서 상세 페이지 전체 레이아웃, 랜딩 페이지 UI, @media print CSS, 반응형 디자인을 완성합니다.\n\n구현 대상:\n1. quotes/[slug]/page.tsx: generateMetadata(), Suspense(QuoteSkeleton fallback), QuoteContent 분리, notFound() 호출, 모든 Quote 컴포넌트 조합\n2. app/page.tsx: 서비스 소개 랜딩 페이지 기본 UI\n3. globals.css @media print 블록: A4 용지 설정, .print-content 클래스, 불필요 요소 숨김, 테이블 border 유지\n4. 404/error 페이지 UI 완성: FileQuestion/AlertTriangle 아이콘 활용\n5. 전체 반응형 레이아웃: 모바일 우선 접근 (px-4 → sm:px-6 → lg:px-8)\n\n검증 기준:\n- Suspense fallback 정상 동작\n- @media print에서 QuoteActions 숨김 확인\n- 404 페이지 notFound() 트리거 확인",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "2264a06c-c9c8-42a5-b457-4bedd359812b"
+        }
+      ],
+      "createdAt": "2026-02-20T22:19:14.233Z",
+      "updatedAt": "2026-02-20T22:19:54.407Z",
+      "relatedFiles": [
+        {
+          "path": "src/app/quotes/[slug]/page.tsx",
+          "type": "TO_MODIFY",
+          "description": "견적서 상세 페이지 메인"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "type": "TO_MODIFY",
+          "description": "랜딩 페이지"
+        },
+        {
+          "path": "src/app/globals.css",
+          "type": "TO_MODIFY",
+          "description": "@media print 스타일 추가"
+        },
+        {
+          "path": "src/app/quotes/[slug]/not-found.tsx",
+          "type": "REFERENCE",
+          "description": "404 페이지"
+        },
+        {
+          "path": "src/app/quotes/[slug]/error.tsx",
+          "type": "REFERENCE",
+          "description": "에러 페이지"
+        },
+        {
+          "path": "src/components/quote/quote-header.tsx",
+          "type": "DEPENDENCY",
+          "description": "Phase 2-1 산출물"
+        },
+        {
+          "path": "src/components/quote/quote-actions.tsx",
+          "type": "DEPENDENCY",
+          "description": "Phase 2-2 산출물"
+        }
+      ],
+      "implementationGuide": "1. src/app/quotes/[slug]/page.tsx:\n   - generateMetadata: quote.title + quote.quoteNumber + clientCompany\n   - QuoteContent async 함수: getQuoteBySlug → notFound() → getQuoteItems → 컴포넌트 렌더\n   - print-content 클래스 컨테이너\n   - Suspense fallback={<QuoteSkeleton />}\n2. src/app/globals.css:\n   - @media print { .print-content { ... } }\n   - A4 용지: @page { size: A4; margin: 20mm; }\n   - print:hidden 요소 display:none\n3. src/app/quotes/[slug]/not-found.tsx: FileQuestion + '견적서를 찾을 수 없습니다'\n4. src/app/quotes/[slug]/error.tsx: 'use client' + AlertTriangle + reset() 버튼",
+      "verificationCriteria": "npm run dev 실행 후 /quotes/[slug] 페이지 전체 렌더링 확인. Playwright MCP로 존재하지 않는 slug 접근 시 404 페이지 표시 확인. 브라우저 인쇄 미리보기에서 QuoteActions 버튼 숨김 확인. npm run check-all 통과.",
+      "analysisResult": "Phase 2 목표: Next.js 15.5.3 기반 견적서 웹 뷰어의 UI/UX 완성. shadcn/ui 컴포넌트를 활용한 견적서 도메인 컴포넌트 라이브러리 구축 및 반응형 페이지 레이아웃 구현. 아키텍처 원칙: Server Component 우선 (quote-actions.tsx만 Client Component), 시맨틱 색상 변수, print:hidden 클래스, cn() 함수, Named export, any 타입 금지.",
+      "summary": "구현 완료 확인. quotes/[slug]/page.tsx: generateMetadata(title+quoteNumber+clientCompany), QuoteContent async 함수 분리, Suspense(QuoteSkeleton fallback), notFound() 트리거, print-content 클래스, 반응형 패딩(px-4 sm:px-6 lg:px-8), 비고 섹션 포함, 모든 Quote 컴포넌트 조합. not-found.tsx: FileQuestion 아이콘, 홈으로 버튼. error.tsx: 'use client', AlertTriangle 아이콘, reset() 버튼. globals.css: @media print 블록 구현. npm run check-all 통과.",
+      "completedAt": "2026-02-20T22:19:54.403Z"
+    }
+  ]
+}
