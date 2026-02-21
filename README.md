@@ -50,6 +50,32 @@ npm run dev
 
 [http://localhost:3000](http://localhost:3000)에서 결과를 확인할 수 있습니다.
 
+## Notion 설정
+
+### Notion Integration 생성
+
+1. [Notion Integrations](https://www.notion.so/profile/integrations)에서 새 Integration 생성
+2. **Integration Token** 복사 → `NOTION_API_KEY`에 설정
+3. 각 데이터베이스 페이지에서 **Connect to** → 생성한 Integration 추가
+4. 데이터베이스 URL에서 ID 복사: `notion.so/workspace/[DATABASE_ID]?v=...`
+
+### 견적서 URL 구조
+
+```
+https://your-domain.com/quotes/[slug]
+```
+
+- `slug`는 Notion Quotes DB의 `slug` 필드 값
+- **발행완료** 상태인 견적서만 외부 접근 허용
+- 그 외 상태(작성중, 만료)는 자동으로 404 처리
+
+### 캐싱 전략
+
+Notion API Rate Limit(평균 3req/s) 대응을 위해 ISR을 적용합니다:
+
+- 페이지 캐시: 1시간(3600초) 후 재검증
+- `unstable_cache`로 Notion API 호출 중복 방지
+
 ## Notion 데이터베이스 설정
 
 ### Quotes 데이터베이스
