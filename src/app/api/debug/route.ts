@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from 'next/server'
 import { notion } from '@/lib/notion/client'
 import { env } from '@/lib/env'
@@ -27,18 +28,12 @@ export async function GET(request: Request) {
     })
 
     const pages = allResults.results.map(page => {
-      if (!('properties' in page)) return { id: page.id }
-      const props = page.properties
+      const p = page as any
+      const props = p.properties ?? {}
       return {
         id: page.id,
-        slug:
-          props[QUOTE_PROPS.SLUG]?.type === 'rich_text'
-            ? (props[QUOTE_PROPS.SLUG].rich_text[0]?.plain_text ?? '없음')
-            : '속성없음',
-        status:
-          props[QUOTE_PROPS.STATUS]?.type === 'status'
-            ? (props[QUOTE_PROPS.STATUS].status?.name ?? '없음')
-            : '속성없음',
+        slug: props[QUOTE_PROPS.SLUG]?.rich_text?.[0]?.plain_text ?? '없음',
+        status: props[QUOTE_PROPS.STATUS]?.status?.name ?? '없음',
       }
     })
 
@@ -67,9 +62,7 @@ export async function GET(request: Request) {
     })
   } catch (error) {
     return NextResponse.json(
-      {
-        error: error instanceof Error ? error.message : String(error),
-      },
+      { error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }
