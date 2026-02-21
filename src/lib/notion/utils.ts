@@ -10,71 +10,54 @@ type Properties = PageObjectResponse['properties']
 type Property = Properties[string]
 
 // rich_text 속성에서 텍스트 추출
-function getRichText(prop: Property): string {
-  if (prop.type === 'rich_text') {
-    return prop.rich_text
-      .map((t: RichTextItemResponse) => t.plain_text)
-      .join('')
-  }
-  return ''
+function getRichText(prop: Property | undefined): string {
+  if (!prop || prop.type !== 'rich_text') return ''
+  return prop.rich_text.map((t: RichTextItemResponse) => t.plain_text).join('')
 }
 
 // title 속성에서 텍스트 추출
-function getTitle(prop: Property): string {
-  if (prop.type === 'title') {
-    return prop.title.map((t: RichTextItemResponse) => t.plain_text).join('')
-  }
-  return ''
+function getTitle(prop: Property | undefined): string {
+  if (!prop || prop.type !== 'title') return ''
+  return prop.title.map((t: RichTextItemResponse) => t.plain_text).join('')
 }
 
 // number 속성에서 숫자 추출
-function getNumber(prop: Property): number {
-  if (prop.type === 'number') {
-    return prop.number ?? 0
-  }
-  return 0
+function getNumber(prop: Property | undefined): number {
+  if (!prop || prop.type !== 'number') return 0
+  return prop.number ?? 0
 }
 
-// select 속성에서 값 추출
-function getSelect(prop: Property): string {
-  if (prop.type === 'select') {
-    return prop.select?.name ?? ''
-  }
+// select 또는 status 속성에서 값 추출
+function getSelect(prop: Property | undefined): string {
+  if (!prop) return ''
+  if (prop.type === 'select') return prop.select?.name ?? ''
+  if (prop.type === 'status') return prop.status?.name ?? ''
   return ''
 }
 
 // date 속성에서 시작일 추출
-function getDate(prop: Property): string | null {
-  if (prop.type === 'date') {
-    return prop.date?.start ?? null
-  }
-  return null
+function getDate(prop: Property | undefined): string | null {
+  if (!prop || prop.type !== 'date') return null
+  return prop.date?.start ?? null
 }
 
 // phone_number 속성에서 전화번호 추출
-function getPhone(prop: Property): string {
-  if (prop.type === 'phone_number') {
-    return prop.phone_number ?? ''
-  }
-  return ''
+function getPhone(prop: Property | undefined): string {
+  if (!prop || prop.type !== 'phone_number') return ''
+  return prop.phone_number ?? ''
 }
 
 // email 속성에서 이메일 추출
-function getEmail(prop: Property): string {
-  if (prop.type === 'email') {
-    return prop.email ?? ''
-  }
-  return ''
+function getEmail(prop: Property | undefined): string {
+  if (!prop || prop.type !== 'email') return ''
+  return prop.email ?? ''
 }
 
 // formula 속성에서 숫자 추출
-function getFormula(prop: Property): number {
-  if (prop.type === 'formula') {
-    const formula = prop.formula
-    if (formula.type === 'number') {
-      return formula.number ?? 0
-    }
-  }
+function getFormula(prop: Property | undefined): number {
+  if (!prop || prop.type !== 'formula') return 0
+  const formula = prop.formula
+  if (formula.type === 'number') return formula.number ?? 0
   return 0
 }
 
@@ -96,7 +79,7 @@ export function pageToQuote(page: PageObjectResponse): Quote {
     clientEmail: getEmail(props[QUOTE_PROPS.CLIENT_EMAIL]),
     subtotal: getNumber(props[QUOTE_PROPS.SUBTOTAL]),
     tax: getNumber(props[QUOTE_PROPS.TAX]),
-    total: getNumber(props[QUOTE_PROPS.TOTAL]),
+    total: getFormula(props[QUOTE_PROPS.TOTAL]),
     notes: getRichText(props[QUOTE_PROPS.NOTES]),
   }
 }

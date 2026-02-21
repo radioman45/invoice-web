@@ -9,8 +9,8 @@ export function QuoteActions() {
   }
 
   return (
-    <div className="flex justify-center gap-3 print:hidden">
-      <Button onClick={handlePrint} size="lg">
+    <div className="flex justify-center gap-3 pt-2 print:hidden">
+      <Button onClick={handlePrint} size="lg" aria-label="PDF로 저장 또는 인쇄">
         <Download className="mr-2 h-4 w-4" />
         PDF 다운로드 / 인쇄
       </Button>

@@ -8,6 +8,10 @@ import { QuoteItemsTable } from '@/components/quote/quote-items-table'
 import { QuoteSummary } from '@/components/quote/quote-summary'
 import { QuoteActions } from '@/components/quote/quote-actions'
 import { QuoteSkeleton } from '@/components/quote/quote-skeleton'
+import { SiteHeader } from '@/components/layout/site-header'
+
+// ISR: 1시간(3600초)마다 Notion 데이터 재검증 (Rate Limit 대응)
+export const revalidate = 3600
 
 interface QuotePageProps {
   params: Promise<{ slug: string }>
@@ -39,13 +43,13 @@ async function QuoteContent({ slug }: { slug: string }) {
   const items = await getQuoteItems(quote.id)
 
   return (
-    <div className="print-content mx-auto max-w-4xl space-y-8">
+    <div className="print-content site-container space-y-8">
       <QuoteHeader quote={quote} />
       <QuoteParties quote={quote} />
       <QuoteItemsTable items={items} />
       <QuoteSummary quote={quote} />
       {quote.notes && (
-        <div className="rounded-lg border p-6">
+        <div className="border-border/70 bg-card/80 rounded-xl border p-5 shadow-sm sm:p-6">
           <h3 className="text-muted-foreground mb-2 text-sm font-semibold">
             비고
           </h3>
@@ -61,10 +65,13 @@ export default async function QuotePage({ params }: QuotePageProps) {
   const { slug } = await params
 
   return (
-    <main className="bg-background min-h-screen px-4 py-8 sm:px-6 lg:px-8">
-      <Suspense fallback={<QuoteSkeleton />}>
-        <QuoteContent slug={slug} />
-      </Suspense>
-    </main>
+    <div className="bg-background min-h-screen">
+      <SiteHeader />
+      <main className="py-8 sm:py-10">
+        <Suspense fallback={<QuoteSkeleton />}>
+          <QuoteContent slug={slug} />
+        </Suspense>
+      </main>
+    </div>
   )
 }

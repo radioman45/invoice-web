@@ -20,6 +20,15 @@ export const metadata: Metadata = {
     template: '%s | 견적서 웹 뷰어',
   },
   description: '견적서를 웹에서 확인하고 PDF로 다운로드할 수 있습니다.',
+  openGraph: {
+    title: '견적서 웹 뷰어',
+    description: '견적서를 웹에서 확인하고 PDF로 다운로드할 수 있습니다.',
+    type: 'website',
+    locale: 'ko_KR',
+  },
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({

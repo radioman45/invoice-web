@@ -121,6 +121,12 @@
   }
 }
 
+@layer utilities {
+  .site-container {
+    @apply mx-auto w-full max-w-3xl px-4 sm:px-6;
+  }
+}
+
 /* 견적서 PDF 인쇄 스타일 */
 @media print {
   /* 기본 인쇄 설정 */

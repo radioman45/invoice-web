@@ -9,7 +9,7 @@ export function QuoteParties({ quote }: QuotePartiesProps) {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       {/* 수신자 정보 */}
-      <Card>
+      <Card className="border-border/70 bg-card/80 shadow-sm">
         <CardHeader className="pb-3">
           <CardTitle className="text-muted-foreground text-sm font-semibold">
             수신
@@ -24,7 +24,7 @@ export function QuoteParties({ quote }: QuotePartiesProps) {
       </Card>
 
       {/* 발행 정보 (필요시 확장 가능) */}
-      <Card>
+      <Card className="border-border/70 bg-card/80 shadow-sm">
         <CardHeader className="pb-3">
           <CardTitle className="text-muted-foreground text-sm font-semibold">
             발행

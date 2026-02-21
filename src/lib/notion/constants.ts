@@ -6,10 +6,10 @@ export const QUOTE_PROPS = {
   STATUS: '상태',
   ISSUE_DATE: '발행일',
   VALID_UNTIL: '유효기간',
-  CLIENT_COMPANY: '수신 업체명',
-  CLIENT_NAME: '수신 담당자명',
-  CLIENT_PHONE: '수신 연락처',
-  CLIENT_EMAIL: '수신 이메일',
+  CLIENT_COMPANY: '수신업체명',
+  CLIENT_NAME: '수신담당자명',
+  CLIENT_PHONE: '수신연락처',
+  CLIENT_EMAIL: '수신이메일',
   SUBTOTAL: '공급가액',
   TAX: '부가세',
   TOTAL: '총합계',
@@ -19,7 +19,7 @@ export const QUOTE_PROPS = {
 // Notion 견적 항목(Quote Items) DB 속성명
 export const ITEM_PROPS = {
   NAME: '품명',
-  QUOTE: '견적서',
+  QUOTE: 'Invoices',
   SPEC: '규격',
   QUANTITY: '수량',
   UNIT_PRICE: '단가',
@@ -31,6 +31,6 @@ export const ITEM_PROPS = {
 // 견적서 상태값
 export const QUOTE_STATUS = {
   DRAFT: '작성중',
-  PUBLISHED: '발행완료',
+  PUBLISHED: '승인',
   EXPIRED: '만료',
 } as const

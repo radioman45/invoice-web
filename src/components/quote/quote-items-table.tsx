@@ -7,23 +7,40 @@ interface QuoteItemsTableProps {
 
 export function QuoteItemsTable({ items }: QuoteItemsTableProps) {
   return (
-    <div className="overflow-x-auto rounded-lg border">
-      <table className="w-full text-sm">
+    <div className="border-border/70 bg-card/80 overflow-x-auto rounded-xl border shadow-sm">
+      <table className="w-full text-sm" aria-label="견적 항목">
         <thead>
-          <tr className="bg-muted/50 border-b">
-            <th className="px-4 py-3 text-left font-semibold">No.</th>
-            <th className="px-4 py-3 text-left font-semibold">품명</th>
-            <th className="hidden px-4 py-3 text-left font-semibold sm:table-cell">
+          <tr className="bg-muted/40 border-b">
+            <th scope="col" className="px-4 py-3 text-left font-semibold">
+              No.
+            </th>
+            <th scope="col" className="px-4 py-3 text-left font-semibold">
+              품명
+            </th>
+            <th
+              scope="col"
+              className="hidden px-4 py-3 text-left font-semibold sm:table-cell"
+            >
               규격
             </th>
-            <th className="px-4 py-3 text-right font-semibold">수량</th>
-            <th className="hidden px-4 py-3 text-center font-semibold sm:table-cell">
+            <th scope="col" className="px-4 py-3 text-right font-semibold">
+              수량
+            </th>
+            <th
+              scope="col"
+              className="hidden px-4 py-3 text-center font-semibold sm:table-cell"
+            >
               단위
             </th>
-            <th className="hidden px-4 py-3 text-right font-semibold sm:table-cell">
+            <th
+              scope="col"
+              className="hidden px-4 py-3 text-right font-semibold sm:table-cell"
+            >
               단가
             </th>
-            <th className="px-4 py-3 text-right font-semibold">금액</th>
+            <th scope="col" className="px-4 py-3 text-right font-semibold">
+              금액
+            </th>
           </tr>
         </thead>
         <tbody>

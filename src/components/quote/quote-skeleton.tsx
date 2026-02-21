@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 export function QuoteSkeleton() {
   return (
-    <div className="mx-auto max-w-4xl space-y-8">
+    <div className="site-container space-y-8">
       {/* 헤더 */}
       <div className="space-y-4">
         <Skeleton className="h-9 w-64" />
