@@ -1,0 +1,9 @@
+# 배포 시 제외할 파일
+.playwright-mcp/
+shrimp_data/
+phase1-tasks.json
+project_tree.txt
+claude_summary.md
+invoice-web-2026-02-17.txt
+transfer_to_gpt.md
+docs/
