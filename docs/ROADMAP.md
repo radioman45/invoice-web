@@ -127,7 +127,10 @@ Notion 데이터베이스에 입력한 견적서를 클라이언트(고객)가 �
   - ✅ `vercel.json` 생성 (framework, region: `icn1` 서울)
   - ✅ `.vercelignore` 생성 (불필요 파일 제외)
   - ✅ 프로덕션 빌드 성공 확인
-  - ⏳ 실제 배포는 GitHub 연동 또는 `vercel --prod` 명령으로 진행
+  - ✅ GitHub 저장소 생성 및 연동 (`radioman45/invoice-web`)
+  - ✅ Vercel 배포 성공 (https://invoice-web-kappa.vercel.app)
+  - ✅ Next.js 보안 취약점 패치 (CVE-2025-66478: 15.5.3 → 15.5.12)
+  - ✅ Husky CI 환경 오류 수정 (`prepare` 스크립트 CI 조건 분기)
 
 - **Task 012: 문서화 및 마무리** ✅ - 완료
   - ✅ README.md 업데이트 - Notion Integration 설정, slug URL 구조, ISR 캐싱 설명 추가
@@ -200,4 +203,5 @@ src/
 
 ---
 
-**마지막 업데이트**: 2026-02-22
+**📅 최종 업데이트**: 2026-02-22
+**📊 진행 상황**: 전체 완료 (12/12 Tasks 완료 ✅)
